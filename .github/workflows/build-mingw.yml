@@ -29,7 +29,7 @@ jobs:
             is_debug=false\
             is_official_build=true\
             clang_win="C:/Program Files/LLVM"\
-            clang_win_version=18 is_trivial_abi=false'\
+            clang_win_version=18 is_trivial_abi=false\
             skia_enable_fontmgr_win=true\
             skia_use_freetype=false\
             skia_use_system_libjpeg_turbo=false\
