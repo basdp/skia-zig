@@ -25,4 +25,4 @@ jobs:
           python3 bin/fetch-ninja
           bin/gn gen out/Static --args='is_official_build=true' --platform=mingw 
           ls -lah
-          ninja.exe -C out/Static skia
+          third_party/ninja/ninja -C out/Static skia
