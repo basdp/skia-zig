@@ -31,6 +31,7 @@ jobs:
             target_os="win"
             target_cpu="x64"
             is_debug=false
+            is_static_skiasharp=true
             is_official_build=true
             skia_enable_fontmgr_win=true
             skia_enable_gpu=true
