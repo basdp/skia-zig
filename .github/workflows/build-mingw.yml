@@ -25,17 +25,17 @@ jobs:
           cd skia
           python3 tools/git-sync-deps
           python3 bin/fetch-ninja
-          bin/gn gen out/lib --platform=mingw --args='\
-            is_debug=false\
-            is_official_build=true\
-            clang_win="C:/Program Files/LLVM"\
-            clang_win_version=18 is_trivial_abi=false\
-            skia_enable_fontmgr_win=true\
-            skia_use_freetype=false\
-            skia_use_system_libjpeg_turbo=false\
-            skia_use_system_libpng=false\
-            skia_use_system_libwebp=false\
-            skia_use_system_zlib=false\
+          bin/gn gen out/lib --platform=mingw --args='
+            is_debug=false
+            is_official_build=true
+            clang_win="C:/Program Files/LLVM"
+            clang_win_version=18 is_trivial_abi=false
+            skia_enable_fontmgr_win=true
+            skia_use_freetype=false
+            skia_use_system_libjpeg_turbo=false
+            skia_use_system_libpng=false
+            skia_use_system_libwebp=false
+            skia_use_system_zlib=false
           '
           third_party/ninja/ninja -C out/lib skia
           cp --recursive include out/include
