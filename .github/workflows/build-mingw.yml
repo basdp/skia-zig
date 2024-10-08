@@ -1,8 +1,9 @@
 name: Build with MinGW GCC
 run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
 on: [push]
+
 jobs:
-  mingw64-gcc:
+  mingw64-x64:
     name: Build Skia with MinGW GCC
 
     runs-on: windows-latest
@@ -23,6 +24,12 @@ jobs:
           cd skia
           python3 tools/git-sync-deps
           python3 bin/fetch-ninja
-          bin/gn gen out/Static --args='is_official_build=true' --platform=mingw 
+          bin/gn gen out/lib --platform=mingw --args='is_debug=false is_official_build=true cc=x86_64-w64-mingw32-gcc cxx=x86_64-w64-mingw32-g++ ld=x86_64-w64-mingw32-g++'
           ls -lah
-          third_party/ninja/ninja -C out/Static skia
+          third_party/ninja/ninja -C out/lib skia
+          cp --recursive include out/include
+      - name: Archive the build
+        uses: actions/upload-artifact@v4
+        with:
+          name: windows-mingw64-x64
+          path: out
