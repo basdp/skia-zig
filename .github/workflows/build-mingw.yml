@@ -40,7 +40,7 @@ jobs:
             skia_use_icu=false
             skia_use_expat=false
           '
-          third_party/ninja/ninja -C out/lib skia
+          third_party/ninja/ninja -C ../out/lib skia
           cp --recursive include ../out/include
       - name: Archive the build
         uses: actions/upload-artifact@v4
