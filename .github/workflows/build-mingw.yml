@@ -17,7 +17,7 @@ jobs:
           gcc --version
 
       - name: "Clone skia"
-        run: git clone --depth 0 https://github.com/mono/skia.git
+        run: git clone --depth 1 https://github.com/mono/skia.git
       - name: "Build skia"
         run: |
           cd skia
