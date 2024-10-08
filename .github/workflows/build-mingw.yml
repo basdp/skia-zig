@@ -3,7 +3,7 @@ run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
 on: [push]
 jobs:
   mingw64-gcc:
-    name: MinGW GCC
+    name: Build Skia with MinGW GCC
 
     runs-on: windows-latest
 
@@ -24,4 +24,4 @@ jobs:
           python3 tools/git-sync-deps
           python3 bin/fetch-ninja
           bin/gn gen out/Static --args='is_official_build=true'
-          ninja -C out/Static skia
+          bin/ninja -C out/Static skia
