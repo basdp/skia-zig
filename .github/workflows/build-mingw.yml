@@ -15,7 +15,6 @@ jobs:
       - name: "Setup"
         run: |
           gcc --version
-          ninja --version
 
       - name: "Clone skia"
         run: git clone https://github.com/mono/skia.git
