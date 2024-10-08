@@ -16,6 +16,13 @@ jobs:
       - name: "Setup"
         run: |
           gcc --version
+          clang --version
+          
+      - name: Set up Clang
+        uses: egor-tensin/setup-clang@v1
+        with:
+          version: latest
+          platform: x64
 
       - name: "Clone skia"
         run: git clone --depth 1 https://github.com/mono/skia.git
