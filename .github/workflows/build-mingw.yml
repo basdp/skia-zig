@@ -16,9 +16,9 @@ jobs:
       - uses: msys2/setup-msys2@v2
         id: msys2
         with:
-          msystem: CLANG64
+          msystem: MINGW64
           update: true
-          install: clang lld
+          install: mingw-w64-x86_64-clang mingw-w64-x86_64-lld
 
       - name: "Clone skia"
         run: git clone --depth 1 https://github.com/mono/skia.git
@@ -27,10 +27,9 @@ jobs:
           cd skia
           python3 tools/git-sync-deps
           python3 bin/fetch-ninja
-          bin/gn gen out/lib --platform=mingw --args='
+          bin/gn gen out/lib --args='
             is_debug=false
             is_official_build=true
-            is_trivial_abi=false
             skia_enable_fontmgr_win=true
             skia_enable_gpu=true
             skia_enable_pdf=true
@@ -42,7 +41,7 @@ jobs:
             skia_use_harfbuzz=false
             skia_use_icu=false
             skia_use_expat=false
-            clang_win="${{ steps.msys2.outputs.msys2-location }}/clang64"
+            clang_win="${{ steps.msys2.outputs.msys2-location }}/mingw64"
             clang_win_version=18
 
           '
