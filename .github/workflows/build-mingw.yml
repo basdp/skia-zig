@@ -24,7 +24,7 @@ jobs:
       - name: "Build skia"
         run: |
           cd skia
-          python3 tools/git-sync-deps
+          python3 tools/git-sync-deps windows
           python3 bin/fetch-ninja
           bin/gn gen out/lib --platform=mingw --args='
             is_debug=false
