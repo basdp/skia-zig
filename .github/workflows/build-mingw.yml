@@ -5,7 +5,7 @@ jobs:
   mingw64-gcc:
     name: MinGW GCC
 
-    runs-on: windows-2019
+    runs-on: windows-latest
 
     defaults:
       run:
@@ -15,3 +15,12 @@ jobs:
       - name: "Setup"
         run: |
           gcc --version
+          ninja --version
+
+      - name: "Clone skia"
+        run: git clone https://github.com/mono/skia.git
+      - name: "Build skia"
+        run: |
+          cd skia
+          python3 tools/git-sync-deps
+          bin/gn gen out/Shared --args='is_official_build=true'
