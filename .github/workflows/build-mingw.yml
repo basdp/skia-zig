@@ -43,6 +43,7 @@ jobs:
             skia_use_icu=false
             skia_use_expat=false
             clang_win="${{ steps.msys2.outputs.msys2-location }}"
+            clang_win_version=18
 
           '
           third_party/ninja/ninja -C out/lib skia
