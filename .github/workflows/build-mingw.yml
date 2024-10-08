@@ -17,7 +17,7 @@ jobs:
         with:
           msystem: MINGW64
           update: true
-          install: mingw-w64-x86_64-clang git python3 mingw-w64-x86_64-gn
+          install: mingw-w64-x86_64-clang git python3 mingw-w64-x86_64-gn ninja
 
       - name: "Clone skia"
         run: git clone --depth 1 https://github.com/mono/skia.git
@@ -27,11 +27,7 @@ jobs:
           cd skia
           rm bin/fetch-gn # not needed and will crash as it's not understanding msys
           echo -e '#!/bin/sh\nexit 0\n' > bin/fetch-gn
-          echo test:
-          bin/fetch-gn
-          echo done $?
-          python3 tools/git-sync-deps windows
-          python3 bin/fetch-ninja
+          python3 tools/git-sync-deps
           bin/gn gen out/lib --platform=mingw --args='
             is_debug=false
             is_official_build=true
