@@ -16,9 +16,9 @@ jobs:
       - uses: msys2/setup-msys2@v2
         id: msys2
         with:
-          msystem: MINGW64
+          msystem: CLANG64
           update: true
-          install: mingw-w64-x86_64-clang mingw-w64-x86_64-lld
+          #install: mingw-w64-x86_64-clang mingw-w64-x86_64-lld
 
       - name: "Clone skia"
         run: git clone --depth 1 https://github.com/mono/skia.git
@@ -42,7 +42,7 @@ jobs:
             skia_use_harfbuzz=false
             skia_use_icu=false
             skia_use_expat=false
-            clang_win="${{ steps.msys2.outputs.msys2-location }}/mingw64"
+            clang_win="${{ steps.msys2.outputs.msys2-location }}/clang64"
             clang_win_version=18
 
           '
