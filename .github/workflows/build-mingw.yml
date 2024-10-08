@@ -27,6 +27,7 @@ jobs:
           cd skia
           rm bin/fetch-gn # not needed and will crash as it's not understanding msys
           echo -e '#!/bin/sh\nexit 0\n' > bin/fetch-gn
+          cat bin/fetch-gn
           python3 tools/git-sync-deps
           gn gen out/lib --platform=mingw --args='
             is_debug=false
