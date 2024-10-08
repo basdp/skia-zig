@@ -24,4 +24,5 @@ jobs:
           python3 tools/git-sync-deps
           python3 bin/fetch-ninja
           bin/gn gen out/Static --args='is_official_build=true'
+          tree
           bin/ninja -C out/Static skia
