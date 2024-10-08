@@ -17,7 +17,7 @@ jobs:
         with:
           msystem: MINGW64
           update: true
-          install: mingw-w64-x86_64-clang git python3 gn
+          install: mingw-w64-x86_64-clang git python3 mingw-w64-x86_64-gn
 
       - name: "Clone skia"
         run: git clone --depth 1 https://github.com/mono/skia.git
