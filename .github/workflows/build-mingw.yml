@@ -13,13 +13,6 @@ jobs:
         shell: bash
 
     steps:
-      - uses: msys2/setup-msys2@v2
-        id: msys2
-        with:
-          msystem: UCRT64
-          update: true
-          install: mingw-w64-ucrt-x86_64-clang mingw-w64-ucrt-x86_64-lld
-
       - name: "Clone skia"
         run: git clone --depth 1 https://github.com/mono/skia.git
       - name: "Build skia"
@@ -43,8 +36,6 @@ jobs:
             skia_use_harfbuzz=false
             skia_use_icu=false
             skia_use_expat=false
-            clang_win="${{ steps.msys2.outputs.msys2-location }}/ucrt64"
-            clang_win_version=18
 
           '
           bin/gn args out/lib --list
