@@ -10,26 +10,24 @@ jobs:
 
     defaults:
       run:
-        shell: msys2 {0}
+        shell: bash
 
     steps:
       - uses: msys2/setup-msys2@v2
+        id: msys2
         with:
           msystem: MINGW64
           update: true
-          install: mingw-w64-x86_64-clang git python3 mingw-w64-x86_64-gn ninja
+          install: mingw-w64-x86_64-clang
 
       - name: "Clone skia"
         run: git clone --depth 1 https://github.com/mono/skia.git
       - name: "Build skia"
         run: |
-          git config --global init.defaultBranch master
           cd skia
-          rm bin/fetch-gn # not needed and will crash as it's not understanding msys
-          echo -e '#!/usr/bin/env python3\nexit()\n' > bin/fetch-gn
-          cat bin/fetch-gn
           python3 tools/git-sync-deps
-          gn gen out/lib --platform=mingw --args='
+          python3 bin/fetch-ninja
+          bin/gn gen out/lib --platform=mingw --args='
             is_debug=false
             is_official_build=true
             is_trivial_abi=false
@@ -44,6 +42,8 @@ jobs:
             skia_use_harfbuzz=false
             skia_use_icu=false
             skia_use_expat=false
+            clang_win="${{ steps.msys2.outputs.msys2-location }}"
+
           '
           third_party/ninja/ninja -C out/lib skia
           mkdir -p ../lib/skia/win-x64/lib
