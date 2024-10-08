@@ -52,8 +52,6 @@ jobs:
             clang_win_version=18
             cc="${{ steps.msys2.outputs.msys2-location }}/mingw64/bin/clang"
             cxx="${{ steps.msys2.outputs.msys2-location }}/mingw64/bin/clang++"
-            extra_cflags=["--target=x86_64-unknown-windows-gnu"]
-            extra_cxxflags=["--target=x86_64-unknown-windows-gnu"]
           '
           bin/gn args out/lib --list
           third_party/ninja/ninja -C out/lib skia
