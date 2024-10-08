@@ -23,7 +23,9 @@ jobs:
         run: git clone --depth 1 https://github.com/mono/skia.git
       - name: "Build skia"
         run: |
+          git config --global init.defaultBranch master
           cd skia
+          rm bin/fetch-gn # not needed and will crash as it's not understanding msys
           python3 tools/git-sync-deps windows
           python3 bin/fetch-ninja
           bin/gn gen out/lib --platform=mingw --args='
