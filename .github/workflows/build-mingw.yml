@@ -10,13 +10,14 @@ jobs:
 
     defaults:
       run:
-        shell: bash
+        shell: msys2 {0}
 
     steps:
-      - name: "Setup"
-        run: |
-          gcc --version
-          clang --version
+      - uses: msys2/setup-msys2@v2
+        with:
+          msystem: MINGW64
+          update: true
+          install: mingw-w64-x86_64-clang
 
       - name: "Clone skia"
         run: git clone --depth 1 https://github.com/mono/skia.git
@@ -25,12 +26,13 @@ jobs:
           cd skia
           python3 tools/git-sync-deps
           python3 bin/fetch-ninja
-          bin/gn gen ../out/lib --platform=mingw --args='
+          bin/gn gen out/lib --platform=mingw --args='
             is_debug=false
             is_official_build=true
-            clang_win="C:/Program Files/LLVM"
-            clang_win_version=18 is_trivial_abi=false
+            is_trivial_abi=false
             skia_enable_fontmgr_win=true
+            skia_enable_gpu=true
+            skia_enable_pdf=true
             skia_use_freetype=false
             skia_use_system_libjpeg_turbo=false
             skia_use_system_libpng=false
@@ -40,10 +42,12 @@ jobs:
             skia_use_icu=false
             skia_use_expat=false
           '
-          third_party/ninja/ninja -C ../out/lib skia
-          cp --recursive include ../out/include
+          third_party/ninja/ninja -C out/lib skia
+          mkdir -p ../lib/skia/win-x64/lib
+          cp --recursive include ../lib/skia/win-x64/include
+          cp --recursive out/lib/*.lib ../lib/skia/win-x64/lib
       - name: Archive the build
         uses: actions/upload-artifact@v4
         with:
           name: windows-mingw64-x64
-          path: out
+          path: lib
