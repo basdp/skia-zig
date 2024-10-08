@@ -23,4 +23,5 @@ jobs:
         run: |
           cd skia
           python3 tools/git-sync-deps
-          bin/gn gen out/Shared --args='is_official_build=true'
+          python3 bin/fetch-ninja
+          bin/gn gen out/Static --args='is_official_build=true'
