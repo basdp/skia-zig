@@ -27,8 +27,9 @@ jobs:
           cd skia
           python3 tools/git-sync-deps
           python3 bin/fetch-ninja
-          bin/gn args out/lib --list
           bin/gn gen out/lib --args='
+            target_os=win
+            target_cpu=x64
             is_debug=false
             is_official_build=true
             skia_enable_fontmgr_win=true
@@ -46,6 +47,7 @@ jobs:
             clang_win_version=18
 
           '
+          bin/gn args out/lib --list
           third_party/ninja/ninja -C out/lib skia
           mkdir -p ../lib/skia/win-x64/lib
           cp --recursive include ../lib/skia/win-x64/include
