@@ -27,6 +27,7 @@ jobs:
           cd skia
           python3 tools/git-sync-deps
           python3 bin/fetch-ninja
+          bin/gn args out/lib --list
           bin/gn gen out/lib --args='
             is_debug=false
             is_official_build=true
