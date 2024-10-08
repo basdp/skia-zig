@@ -17,10 +17,11 @@ jobs:
           gcc --version
 
       - name: "Clone skia"
-        run: git clone https://github.com/mono/skia.git
+        run: git clone --depth 0 https://github.com/mono/skia.git
       - name: "Build skia"
         run: |
           cd skia
           python3 tools/git-sync-deps
           python3 bin/fetch-ninja
           bin/gn gen out/Static --args='is_official_build=true'
+          ninja -C out/Static skia
