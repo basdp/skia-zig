@@ -28,8 +28,8 @@ jobs:
           python3 tools/git-sync-deps
           python3 bin/fetch-ninja
           bin/gn gen out/lib --args='
-            target_os=win
-            target_cpu=x64
+            target_os="win"
+            target_cpu="x64"
             is_debug=false
             is_official_build=true
             skia_enable_fontmgr_win=true
