@@ -24,7 +24,7 @@ jobs:
         run: git clone --depth 1 https://github.com/mono/skia.git
       - name: "Build skia"
         run: |
-          ${{ steps.msys2.outputs.msys2-location }}/ucrt64/bin/clang --version
+          "${{ steps.msys2.outputs.msys2-location }}/ucrt64/bin/clang" --version
           cd skia
           python3 tools/git-sync-deps
           python3 bin/fetch-ninja
