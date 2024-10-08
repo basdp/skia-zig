@@ -16,15 +16,15 @@ jobs:
       - uses: msys2/setup-msys2@v2
         id: msys2
         with:
-          msystem: UCRT64
+          msystem: MINGW64
           update: true
-          install: mingw-w64-ucrt-x86_64-clang mingw-w64-ucrt-x86_64-lld
+          install: mingw-w64-x86_64-clang mingw-w64-x86_64-lld
 
       - name: "Clone skia"
         run: git clone --depth 1 https://github.com/mono/skia.git
       - name: "Build skia"
         run: |
-          "${{ steps.msys2.outputs.msys2-location }}/ucrt64/bin/clang" --version
+          "${{ steps.msys2.outputs.msys2-location }}/mingw64/bin/clang" --version
           cd skia
           python3 tools/git-sync-deps
           python3 bin/fetch-ninja
@@ -45,13 +45,12 @@ jobs:
             skia_use_harfbuzz=false
             skia_use_icu=false
             skia_use_expat=false
-            clang_win="${{ steps.msys2.outputs.msys2-location }}/ucrt64"
+            clang_win="${{ steps.msys2.outputs.msys2-location }}/mingw64"
             clang_win_version=18
-            cc="${{ steps.msys2.outputs.msys2-location }}/ucrt64/bin/clang"
-            cxx="${{ steps.msys2.outputs.msys2-location }}/ucrt64/bin/clang++"
-            extra_cflags=[\"--target=x86_64-unknown-windows-gnu\"]
-            extra_cxxflags=[\"--target=x86_64-unknown-windows-gnu\"]
-
+            cc="${{ steps.msys2.outputs.msys2-location }}/mingw64/bin/clang"
+            cxx="${{ steps.msys2.outputs.msys2-location }}/mingw64/bin/clang++"
+            extra_cflags=["--target=x86_64-unknown-windows-gnu"]
+            extra_cxxflags=["--target=x86_64-unknown-windows-gnu"]
           '
           bin/gn args out/lib --list
           third_party/ninja/ninja -C out/lib skia
