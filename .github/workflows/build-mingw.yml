@@ -24,7 +24,7 @@ jobs:
           cd skia
           python3 tools/git-sync-deps
           python3 bin/fetch-ninja
-          bin/gn gen out/lib --platform=mingw --args='is_debug=false is_official_build=true cc="x86_64-w64-mingw32-gcc" cxx="x86_64-w64-mingw32-g++" ld="x86_64-w64-mingw32-g++"'
+          bin/gn gen out/lib --platform=mingw --args='is_debug=false is_official_build=true platform=mingw cc="x86_64-w64-mingw32-gcc" cxx="x86_64-w64-mingw32-g++" ld="x86_64-w64-mingw32-g++"'
           ls -lah
           third_party/ninja/ninja -C out/lib skia
           cp --recursive include out/include
