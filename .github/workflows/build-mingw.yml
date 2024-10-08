@@ -1,0 +1,17 @@
+name: Build with MinGW GCC
+run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
+on: [push]
+jobs:
+  mingw64-gcc:
+    name: MinGW GCC
+
+    runs-on: windows-2019
+
+    defaults:
+      run:
+        shell: bash
+
+    steps:
+      - name: "Setup"
+        run: |
+          gcc --version
