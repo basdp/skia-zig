@@ -18,7 +18,7 @@ jobs:
         with:
           msystem: MINGW64
           update: true
-          install: mingw-w64-clang-x86_64-clang mingw-w64-clang-x86_64-lld
+          install: mingw-w64-x86_64-clang mingw-w64-x86_64-lld
 
       - name: "Clone skia"
         run: git clone --depth 1 https://github.com/mono/skia.git
@@ -33,7 +33,9 @@ jobs:
             target_cpu="x64"
             is_debug=false
             is_static_skiasharp=true
+            is_component_build=false
             is_official_build=true
+            use_sysroot=false
             skia_enable_fontmgr_win=true
             skia_enable_gpu=true
             skia_enable_pdf=true
@@ -44,6 +46,7 @@ jobs:
             skia_use_system_zlib=false
             skia_use_harfbuzz=false
             skia_use_icu=false
+            skia_enable_tools=false
             skia_use_expat=false
             clang_win="${{ steps.msys2.outputs.msys2-location }}/mingw64"
             clang_win_version=18
@@ -56,7 +59,8 @@ jobs:
           third_party/ninja/ninja -C out/lib skia
           mkdir -p ../lib/skia/win-x64/lib
           cp --recursive include ../lib/skia/win-x64/include
-          cp --recursive out/lib/*.lib ../lib/skia/win-x64/lib
+          cp --recursive out/lib/* ../lib/skia/win-x64/lib
+          ls out/lib
       - name: Archive the build
         uses: actions/upload-artifact@v4
         with:
