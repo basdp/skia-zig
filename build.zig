@@ -29,7 +29,7 @@ pub fn build(b: *std.Build) !void {
     switch (target.result.os.tag) {
         .windows => {
             var path: [128:0]u8 = undefined;
-            _ = try std.fmt.bufPrint(&path, "skia/lib/win-{s}", .{@tagName(target.result.cpu.arch)});
+            _ = try std.fmt.bufPrint(&path, "skia/lib/win-{any}", .{@tagName(target.result.cpu.arch)});
             module.addLibraryPath(b.path(&path));
         },
         else => return error.PlatformNotSupported,
