@@ -3,9 +3,7 @@
 </p>
 
 <p align="center">
-
-[![Build Zig package](https://github.com/basdp/skia-zig/actions/workflows/build.yml/badge.svg)](https://github.com/basdp/skia-zig/actions/workflows/build.yml)
-
+    <a href="https://github.com/basdp/skia-zig/actions/workflows/build.yml"><img src="https://github.com/basdp/skia-zig/actions/workflows/build.yml/badge.svg" /></a>
 </p>
 
 <p align="center">A humble wrapper for Skia to Zig.</p>
