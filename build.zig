@@ -13,6 +13,7 @@ pub fn build(b: *std.Build) !void {
     if (target.result.os.tag == .windows) {
         // Force the MSVC ABI, as Skia requires that
         target.query.abi = .msvc;
+        target.result.abi = .msvc;
     }
 
     // Standard optimization options allow the person running `zig build` to select
