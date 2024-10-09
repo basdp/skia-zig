@@ -52,6 +52,7 @@ jobs:
             clang_win_version=18
             cc="${{ steps.msys2.outputs.msys2-location }}/mingw64/bin/clang"
             cxx="${{ steps.msys2.outputs.msys2-location }}/mingw64/bin/clang++"
+            link="${{ steps.msys2.outputs.msys2-location }}/mingw64/bin/ldd"
           '
           bin/gn args out/lib --list
           third_party/ninja/ninja -C out/lib skia
