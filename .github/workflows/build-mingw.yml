@@ -33,6 +33,7 @@ jobs:
             target_cpu="x64"
             is_debug=false
             is_static_skiasharp=true
+            is_trivial_abi=false
             is_component_build=false
             is_official_build=true
             use_sysroot=false
@@ -53,9 +54,16 @@ jobs:
             cc="${{ steps.msys2.outputs.msys2-location }}/mingw64/bin/clang"
             cxx="${{ steps.msys2.outputs.msys2-location }}/mingw64/bin/clang++"
             link="${{ steps.msys2.outputs.msys2-location }}/mingw64/bin/ldd"
+            extra_ldflags=[
+              "-stdlib=libc++",
+              "-fuse-ld=lld",
+              "--target=x86_64-unknown-windows-gnu"
+            ]
+            extra_cflags=[
+              "--target=x86_64-unknown-windows-gnu"
+            ]
           '
           bin/gn args out/lib --list
-          cat args.gn
           third_party/ninja/ninja -C out/lib skia
           mkdir -p ../lib/skia/win-x64/lib
           cp --recursive include ../lib/skia/win-x64/include
