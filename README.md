@@ -6,7 +6,7 @@
     <a href="https://github.com/basdp/skia-zig/actions/workflows/build.yml"><img src="https://github.com/basdp/skia-zig/actions/workflows/build.yml/badge.svg" /></a>
 </p>
 
-<p align="center">Zig bindings for the famous [Skia 2D Graphics Library](https://skia.org/).</p>
+<p align="center">Zig bindings for the famous <a href="https://skia.org/">Skia 2D Graphics Library</a>.</p>
 
 ## Overview
 
