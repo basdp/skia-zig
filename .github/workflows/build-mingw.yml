@@ -32,10 +32,8 @@ jobs:
             target_os="win"
             target_cpu="x64"
             is_debug=false
-            is_trivial_abi=false
             is_component_build=true
             is_official_build=true
-            use_sysroot=false
             skia_enable_fontmgr_win=true
             skia_enable_gpu=true
             skia_enable_pdf=true
@@ -67,9 +65,22 @@ jobs:
             clang_win_version=18
             cc="${{ steps.msys2.outputs.msys2-location }}/mingw64/bin/clang"
             cxx="${{ steps.msys2.outputs.msys2-location }}/mingw64/bin/clang++"
+            extra_cflags=[ 
+              "-DSKIA_C_DLL", 
+              "-UHAVE_NEWLOCALE", 
+              "-UHAVE_XLOCALE_H", 
+              "-UHAVE_UNISTD_H", 
+              "-UHAVE_SYS_MMAN_H",
+              "-UHAVE_MMAP", 
+              "-UHAVE_PTHREAD" 
+            ]
+            extra_ldflags=[
+              "/defaultlib:opengl32",
+              "/defaultlib:gdi32"
+            ]
           '
           bin/gn args out/lib --list
-          third_party/ninja/ninja -C out/lib
+          third_party/ninja/ninja -C out/lib skia
           mkdir -p ../lib/skia/win-x64/lib
           cp --recursive include ../lib/skia/win-x64/include
           cp --recursive out/lib/* ../lib/skia/win-x64/lib
