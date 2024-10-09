@@ -12,6 +12,8 @@ jobs:
         shell: bash
 
     steps:
+      - uses: actions/checkout@v4
+      
       - uses: msys2/setup-msys2@v2
         id: msys2
         with:
@@ -24,6 +26,7 @@ jobs:
       - name: "Build skia"
         run: |
           "${{ steps.msys2.outputs.msys2-location }}/mingw64/bin/clang" --version
+
           cd skia_repo
           python3 tools/git-sync-deps
           python3 bin/fetch-ninja
