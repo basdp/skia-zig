@@ -10,7 +10,7 @@ pub fn build(b: *std.Build) !void {
     // for restricting supported target set are available.
     const target = b.standardTargetOptions(.{});
 
-    if (comptime target.result.os.tag == .windows and target.result.abi != .msvc) {
+    if (target.result.os.tag == .windows and target.result.abi != .msvc) {
         @compileError("Skia requires the `msvc` abi on Windows. Please specify the abi using the build command (e.g. `zig build -Dtarget=x86_64-windows-msvc`) or force it by overwriting the abi in build.zig: `target.query.abi = .msvc;`.");
     }
 
