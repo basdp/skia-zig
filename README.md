@@ -1,6 +1,18 @@
-# Skia Zig Bindings
+<p align="center">
+    <h1 align="center">Skia Zig Bindings</h1>
+</p>
+
+<p align="center">
+[![Build Zig package](https://github.com/basdp/skia-zig/actions/workflows/build.yml/badge.svg)](https://github.com/basdp/skia-zig/actions/workflows/build.yml)
+</p>
+
+<p align="center">A humble wrapper for Skia to Zig.</p>
+
+## Overview
 
 This repository provides Zig bindings to the Skia C API. It builds Skia for multiple platforms and exposes the raw C headers to be used directly in Zig projects. **No wrappers** are provided—this is a low-level binding to the C layer only.
+
+This repository is using the [Skia fork from the Mono project](https://github.com/mono/skia), as they actively maintain a C wrapper for Skia (which is C++ only). We need C wrappers to bridge to Zig. 
 
 ## Features
 
