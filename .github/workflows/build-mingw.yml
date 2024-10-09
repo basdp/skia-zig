@@ -32,12 +32,12 @@ jobs:
             target_os="win"
             target_cpu="x64"
             is_debug=false
-            is_component_build=true
+            is_component_build=false
+            is_static_skiasharp=true
             is_official_build=true
             skia_enable_fontmgr_win=true
             skia_enable_gpu=true
             skia_enable_pdf=true
-            skia_use_freetype=false
             skia_use_system_libjpeg_turbo=false
             skia_use_system_libpng=false
             skia_use_system_libwebp=false
@@ -48,42 +48,16 @@ jobs:
             skia_enable_tools=false
             skia_use_expat=false
             skia_enable_skottie=false
-            skia_canvaskit_enable_skottie=false
-            skia_canvaskit_enable_embedded_font=false
-            skia_canvaskit_enable_paragraph=false
-            skia_canvaskit_enable_font=false
-            skia_canvaskit_enable_canvas_bindings=false
-            skia_enable_spirv_validation=false
-            skia_enable_vulkan_debug_layers=false
-            skia_use_ffmpeg=false
-            skia_use_fontconfig=false
             skia_use_gl=true
-            skia_use_libheif=false
-            skia_use_lua=false
-            skia_enable_skshaper_tests=false
             clang_win="${{ steps.msys2.outputs.msys2-location }}/mingw64"
             clang_win_version=18
             cc="${{ steps.msys2.outputs.msys2-location }}/mingw64/bin/clang"
             cxx="${{ steps.msys2.outputs.msys2-location }}/mingw64/bin/clang++"
-            extra_cflags=[ 
-              "-DSKIA_C_DLL", 
-              "-UHAVE_NEWLOCALE", 
-              "-UHAVE_XLOCALE_H", 
-              "-UHAVE_UNISTD_H", 
-              "-UHAVE_SYS_MMAN_H",
-              "-UHAVE_MMAP", 
-              "-UHAVE_PTHREAD" 
-            ]
-            extra_ldflags=[
-              "/defaultlib:opengl32",
-              "/defaultlib:gdi32"
-            ]
           '
-          bin/gn args out/lib --list
           third_party/ninja/ninja -C out/lib skia
           mkdir -p ../lib/skia/win-x64/lib
           cp --recursive include ../lib/skia/win-x64/include
-          cp --recursive out/lib/* ../lib/skia/win-x64/lib
+          cp --recursive out/lib/*.lib ../lib/skia/win-x64/lib
           ls out/lib
       - name: Archive the build
         uses: actions/upload-artifact@v4
