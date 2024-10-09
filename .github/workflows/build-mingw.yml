@@ -32,9 +32,8 @@ jobs:
             target_os="win"
             target_cpu="x64"
             is_debug=false
-            is_static_skiasharp=true
             is_trivial_abi=false
-            is_component_build=false
+            is_component_build=true
             is_official_build=true
             use_sysroot=false
             skia_enable_fontmgr_win=true
