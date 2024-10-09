@@ -62,6 +62,7 @@ jobs:
           cd ..
           rm -rf skia_repo
           rm -rf .*
+          ls -lah
       - name: Archive the build
         uses: actions/upload-artifact@v4
         with:
