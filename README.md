@@ -17,11 +17,11 @@ This repository is using the [Skia fork from the Mono project](https://github.co
 ## Features
 
 - Pre-built Skia binaries
-- Exposes the raw Skia C API headers (exposed throug a simple `@cImport` of the Skia headers)
+- Exposes the raw Skia C API headers to Zig
+- Easy to import and use directly from Zig code without any dependencies or extra build steps
 
 ## Project status
-*Warning*: This wrapper is in very early stage and not stable for production use. Also not all 
-features and plaforms are ready.
+*Warning*: This wrapper is in a very early stage and is _not_ stable for production use. Also not all features and plaforms are implemented.
 
 - [x] Skia build for Windows x86_64
 - [ ] Skia build for macOS x86_64
@@ -93,8 +93,8 @@ pub fn main() !void {
 
 ### Setting your ABI to MSVC on Windows
 
-Skia requires a msvc ABI on Windows, so make sure you target that abi. There are two possible 
-options to do so:
+Skia requires the `msvc` ABI on Windows, so make sure you target that ABI. There are two possible 
+options to do so (only one of these is necessary):
 
 1. Set the target from the command line while building:
 
