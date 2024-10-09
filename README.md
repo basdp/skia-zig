@@ -23,10 +23,10 @@ This repository is using the [Skia fork from the Mono project](https://github.co
 *Warning*: This wrapper is in very early stage and not stable for production use. Also not all 
 features and plaforms are ready.
 
-[x] Skia build for Windows x86_64
-[ ] Skia build for macOS x86_64
-[ ] Skia build for macOS Apple Silicon
-[ ] Skia build for Linux
+- [x] Skia build for Windows x86_64
+- [ ] Skia build for macOS x86_64
+- [ ] Skia build for macOS Apple Silicon
+- [ ] Skia build for Linux
 
 ## Getting Started
 
