@@ -58,7 +58,7 @@ jobs:
           '
           third_party/ninja/ninja -C out/lib skia
           
-          mkdir -p ../skia/lib/win-x64
+          mkdir -p ../skia/lib/win-x86_64
           cp --recursive include ../skia/include
           cp --recursive out/lib/*.lib ../skia/lib/win-x86_64/
           
