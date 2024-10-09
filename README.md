@@ -34,7 +34,7 @@ This repository is using the [Skia fork from the Mono project](https://github.co
 
 1. Import the `skia-zig` package into your project:
 ```bash
-zig fetch --save https://github.com/basdp/skia-zig/releases/download/alpha-v1/skia-zig-alpha-v1.zip
+zig fetch --save https://github.com/basdp/skia-zig/releases/latest/download/skia-zig-package.zip
 ```
 
 2. Add the dependency to your `build.zig` file, somewhere below `b.addExecutable(...)` or whatever you are building:
