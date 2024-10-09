@@ -19,10 +19,6 @@ jobs:
           msystem: MINGW64
           update: true
           install: mingw-w64-x86_64-clang mingw-w64-x86_64-lld
-      
-      - uses: mlugg/setup-zig@v1
-        with:
-          version: 0.13.0
 
       - name: "Clone skia"
         run: git clone --depth 1 https://github.com/mono/skia.git
@@ -37,7 +33,7 @@ jobs:
             target_cpu="x64"
             is_debug=false
             is_trivial_abi=false
-            is_component_build=true
+            is_component_build=false
             is_official_build=true
             use_sysroot=false
             skia_enable_fontmgr_win=true
@@ -52,11 +48,16 @@ jobs:
             skia_use_icu=false
             skia_enable_tools=false
             skia_use_expat=false
+            skia_enable_skottie=false
             clang_win="${{ steps.msys2.outputs.msys2-location }}/mingw64"
             clang_win_version=18
-            ar="zig ar"
-            cc="zig cc"
-            cxx="zig c++"
+            cc="${{ steps.msys2.outputs.msys2-location }}/mingw64/bin/clang"
+            cxx="${{ steps.msys2.outputs.msys2-location }}/mingw64/bin/clang++"
+            link="${{ steps.msys2.outputs.msys2-location }}/mingw64/bin/ldd"
+            extra_ldflags=[
+              "-stdlib=libc++",
+              "-fuse-ld=lld",
+            ]
           '
           bin/gn args out/lib --list
           third_party/ninja/ninja -C out/lib skia
