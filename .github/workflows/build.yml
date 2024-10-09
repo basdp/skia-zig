@@ -54,8 +54,9 @@ jobs:
             cxx="${{ steps.msys2.outputs.msys2-location }}/mingw64/bin/clang++"
           '
           third_party/ninja/ninja -C out/lib skia
+          
           mkdir -p ../skia/lib/win-x64
-          cp --recursive include ../lib/skia/win-x64/include
+          cp --recursive include ../skia/include
           cp --recursive out/lib/*.lib ../skia/lib/win-x64/
           
           cd ..
