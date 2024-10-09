@@ -11,7 +11,7 @@ pub fn build(b: *std.Build) !void {
     const target = b.standardTargetOptions(.{});
 
     if (target.result.os.tag == .windows and target.result.abi != .msvc) {
-        std.debug.print("Error: Skia requires the `msvc` abi on Windows. Please specify the abi using the build command (e.g. `zig build -Dtarget=x86_64-windows-msvc`) or force it by overwriting the abi in build.zig: `target.query.abi = .msvc;`.", .{});
+        std.debug.print("Error: Skia requires the `msvc` abi on Windows. Please specify the abi using the build command (e.g. `zig build -Dtarget=x86_64-windows-msvc`) or force it by requesting it in the default_target of b.standardTargetOptions.", .{});
         return error.SkiaRequiresMSVConWin;
     }
 
