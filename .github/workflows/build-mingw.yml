@@ -55,6 +55,7 @@ jobs:
             link="${{ steps.msys2.outputs.msys2-location }}/mingw64/bin/ldd"
           '
           bin/gn args out/lib --list
+          cat args.gn
           third_party/ninja/ninja -C out/lib skia
           mkdir -p ../lib/skia/win-x64/lib
           cp --recursive include ../lib/skia/win-x64/include
