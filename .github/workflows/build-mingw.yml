@@ -50,6 +50,10 @@ jobs:
             skia_enable_tools=false
             skia_use_expat=false
             skia_enable_skottie=false
+            skia_canvaskit_enable_skottie=false
+            skia_canvaskit_enable_paragraph=false
+            skia_canvaskit_enable_font=false
+            skia_canvaskit_enable_canvas_bindings=false
             skia_enable_spirv_validation=false
             skia_enable_vulkan_debug_layers=false
             skia_use_ffmpeg=false
@@ -62,11 +66,6 @@ jobs:
             clang_win_version=18
             cc="${{ steps.msys2.outputs.msys2-location }}/mingw64/bin/clang"
             cxx="${{ steps.msys2.outputs.msys2-location }}/mingw64/bin/clang++"
-            link="${{ steps.msys2.outputs.msys2-location }}/mingw64/bin/ldd"
-            extra_ldflags=[
-              "-stdlib=libc++",
-              "-fuse-ld=lld",
-            ]
           '
           bin/gn args out/lib --list
           third_party/ninja/ninja -C out/lib skia
