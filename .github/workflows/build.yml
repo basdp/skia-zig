@@ -13,7 +13,7 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
-      
+
       - uses: msys2/setup-msys2@v2
         id: msys2
         with:
@@ -60,7 +60,7 @@ jobs:
           
           mkdir -p ../skia/lib/win-x64
           cp --recursive include ../skia/include
-          cp --recursive out/lib/*.lib ../skia/lib/win-x64/
+          cp --recursive out/lib/*.lib ../skia/lib/win-x86_64/
           
           cd ..
           rm -rf skia_repo
