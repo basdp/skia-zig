@@ -57,10 +57,6 @@ jobs:
             extra_ldflags=[
               "-stdlib=libc++",
               "-fuse-ld=lld",
-              "--target=x86_64-unknown-windows-gnu"
-            ]
-            extra_cflags=[
-              "--target=x86_64-unknown-windows-gnu"
             ]
           '
           bin/gn args out/lib --list
