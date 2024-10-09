@@ -8,12 +8,10 @@ pub fn build(b: *std.Build) !void {
     // what target to build for. Here we do not override the defaults, which
     // means any target is allowed, and the default is native. Other options
     // for restricting supported target set are available.
-    var target = b.standardTargetOptions(.{});
+    const target = b.standardTargetOptions(.{});
 
-    if (target.result.os.tag == .windows) {
-        // Force the MSVC ABI, as Skia requires that
-        target.query.abi = .msvc;
-        target.result.abi = .msvc;
+    if (comptime target.result.os.tag == .windows and target.result.abi != .msvc) {
+        @compileError("Skia requires the `msvc` abi on Windows. Please specify the abi using the build command (e.g. `zig build -Dtarget=x86_64-windows-msvc`) or force it by overwriting the abi in build.zig: `target.query.abi = .msvc;`.");
     }
 
     // Standard optimization options allow the person running `zig build` to select
