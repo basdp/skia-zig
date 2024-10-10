@@ -62,8 +62,8 @@ pub fn main() !void {
         .fFormat = gl.RGBA8,
     };
 
-    const samples: = ... // get from GL or something
-    const stencil_bits = ... // get from GL or something
+    const samples: c_int = ... // get from GL or something
+    const stencil_bits: c_int = ... // get from GL or something
 
     const backendRenderTarget = skia.gr_backendrendertarget_new_gl(640, 480, samples, stencil_bits, &gl_info) orelse return error.SkiaCreateRenderTargetFailed;
 
