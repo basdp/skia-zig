@@ -33,7 +33,6 @@ pub fn build(b: *std.Build) !void {
         },
         else => return error.PlatformNotSupported,
     }
-    module.addIncludePath(b.path("skia"));
     module.linkSystemLibrary("skia", .{ .preferred_link_mode = .static });
     module.link_libc = true;
 }
