@@ -4,8 +4,8 @@ on:
   workflow_dispatch:
 
 jobs:
-  mingw64-x64:
-    name: Build Skia with MinGW Clang
+  clang-x64:
+    name: Build Skia
 
     runs-on: ubuntu-latest
 
@@ -44,7 +44,7 @@ jobs:
             skia_enable_tools=false
             skia_use_expat=false
             skia_enable_skottie=false
-            skia_use_gl=true
+            skia_use_vulkan=true
             cc="clang"
             cxx="clang++"
           '
