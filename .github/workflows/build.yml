@@ -1,5 +1,7 @@
 name: Build Zig package
-on: [push]
+on: 
+  push:
+  workflow_dispatch:
 
 jobs:
   mingw64-x64:
