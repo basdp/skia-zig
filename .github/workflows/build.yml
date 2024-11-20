@@ -5,7 +5,7 @@ jobs:
   mingw64-x64:
     name: Build Skia with MinGW Clang
 
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
 
     defaults:
       run:
@@ -13,25 +13,17 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
-
-      - uses: msys2/setup-msys2@v2
-        id: msys2
-        with:
-          msystem: MINGW64
-          update: true
-          install: mingw-w64-x86_64-clang mingw-w64-x86_64-lld
-
       - name: "Clone skia"
         run: git clone --depth 1 https://github.com/mono/skia.git skia_repo
       - name: "Build skia"
         run: |
-          "${{ steps.msys2.outputs.msys2-location }}/mingw64/bin/clang" --version
+          clang --version
 
           cd skia_repo
           python3 tools/git-sync-deps
           python3 bin/fetch-ninja
           bin/gn gen out/lib --args='
-            target_os="win"
+            target_os="linux"
             target_cpu="x64"
             is_debug=false
             is_component_build=false
@@ -51,16 +43,14 @@ jobs:
             skia_use_expat=false
             skia_enable_skottie=false
             skia_use_gl=true
-            clang_win="${{ steps.msys2.outputs.msys2-location }}/mingw64"
-            clang_win_version=18
-            cc="${{ steps.msys2.outputs.msys2-location }}/mingw64/bin/clang"
-            cxx="${{ steps.msys2.outputs.msys2-location }}/mingw64/bin/clang++"
+            cc="clang"
+            cxx="clang++"
           '
           third_party/ninja/ninja -C out/lib skia
           
-          mkdir -p ../skia/lib/win-x86_64
+          mkdir -p ../skia/lib
           cp --recursive include ../skia/include
-          cp --recursive out/lib/*.lib ../skia/lib/win-x86_64/
+          cp --recursive out/lib/*.lib ../skia/lib
           
           cd ..
           rm -rf skia_repo
