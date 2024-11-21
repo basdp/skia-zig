@@ -15,6 +15,10 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
+      - name: Install skia dependency
+        run: |
+            sudo apt update
+            sudo apt install -y expat fontconfig libfreetype-dev libharfbuzz-dev libjpeg-turbo8-dev libpng-dev zlib1g-dev libwebp-dev
       - name: "Clone skia"
         run: git clone --depth 1 https://github.com/mono/skia.git skia_repo
       - uses: mlugg/setup-zig@v1
@@ -35,11 +39,6 @@ jobs:
             skia_enable_gpu=true
             skia_enable_pdf=true
             skia_enable_discrete_gpu=true
-            skia_use_harfbuzz=false
-            skia_use_icu=false
-            skia_enable_tools=false
-            skia_use_expat=false
-            skia_enable_skottie=false
             skia_use_gl=true
             cc="zig cc"
             cxx="zig c++"
