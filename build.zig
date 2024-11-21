@@ -25,5 +25,12 @@ pub fn build(b: *std.Build) !void {
     module.addLibraryPath(b.path(try std.fmt.bufPrint(&path, "skia/lib/", .{})));
 
     module.linkSystemLibrary("skia", .{ .preferred_link_mode = .static });
+    module.linkSystemLibrary("libjpeg", .{});
+    module.linkSystemLibrary("libpng", .{});
+    module.linkSystemLibrary("fontconfig", .{});
+    module.linkSystemLibrary("freetype", .{});
+    module.linkSystemLibrary("libwebp", .{});
+    module.linkSystemLibrary("libwebpdemux", .{});
+    module.linkSystemLibrary("zlib", .{});
     module.link_libc = true;
 }
