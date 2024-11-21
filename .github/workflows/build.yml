@@ -35,7 +35,6 @@ jobs:
             skia_enable_pdf=true
             skia_enable_tools=false
             skia_enable_skottie=false
-            skia_use_system_expat=false
             skia_use_system_freetype2=false
             skia_use_system_libjpeg_turbo=false
             skia_use_system_libpng=false
@@ -46,7 +45,7 @@ jobs:
             skia_use_icu=false
             skia_use_sfntly=false
             skia_use_expat=false
-           skia_use_piex=true
+            skia_use_piex=true
             skia_use_vulkan=true
             cc="clang"
             cxx="clang++"
@@ -55,7 +54,7 @@ jobs:
           
           mkdir -p ../skia/lib
           cp --recursive include ../skia/include
-          cp --recursive out/lib/*.lib ../skia/lib
+          cp --recursive out/lib/*.a ../skia/lib
           
           cd ..
           rm -rf skia_repo
