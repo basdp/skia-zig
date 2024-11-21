@@ -48,7 +48,7 @@ jobs:
             cc="zig cc"
             cxx="zig c++"
             extra_cflags=[
-                "-mavx",
+                "-mevex512",
                 "-DMESA_EGL_NO_X11_HEADERS",
                 "-DEGL_NO_IMAGE_EXTERNAL",
             ]
