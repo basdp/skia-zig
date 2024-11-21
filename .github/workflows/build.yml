@@ -44,9 +44,10 @@ jobs:
             skia_enable_gpu=true
             skia_enable_pdf=true
             skia_enable_discrete_gpu=true
-            skia_use_gl=true
+            skia_use_egl=true
             cc="zig cc"
             cxx="zig c++"
+            extra_cflags=[ "-target x86_64-linux-gnu" ]
           '
           third_party/ninja/ninja -C out/lib skia
           
