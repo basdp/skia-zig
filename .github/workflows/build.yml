@@ -22,8 +22,6 @@ jobs:
           version: 0.13.0
       - name: "Build skia"
         run: |
-          clang --version
-
           cd skia_repo
           python3 tools/git-sync-deps
           python3 bin/fetch-ninja
@@ -37,6 +35,11 @@ jobs:
             skia_enable_gpu=true
             skia_enable_pdf=true
             skia_enable_discrete_gpu=true
+            skia_use_harfbuzz=false
+            skia_use_icu=false
+            skia_enable_tools=false
+            skia_use_expat=false
+            skia_enable_skottie=false
             skia_use_vulkan=true
             cc="zig cc"
             cxx="zig c++"
