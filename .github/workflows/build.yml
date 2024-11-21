@@ -45,17 +45,10 @@ jobs:
             skia_enable_pdf=true
             skia_enable_discrete_gpu=true
             skia_use_egl=true
-            cc="zig cc"
-            cxx="zig c++"
-            extra_asmflags = [
-                "--target=x86_64-linux-gnu"",
-            ]
+            cc="zig cc -target x86_64-linux-gnu"
+            cxx="zig c++ -target x86_64-linux-gnu"
             extra_cflags=[
-                "--target=x86_64-linux-gnu"",
                 "-DMESA_EGL_NO_X11_HEADERS",
-            ]
-            extra_ldflags=[
-                "--target=x86_64-linux-gnu"",
             ]
           '
           third_party/ninja/ninja -C out/lib skia
