@@ -18,7 +18,7 @@ jobs:
       - name: Install skia dependency
         run: |
             sudo apt update
-            sudo apt install -y fontconfig libfreetype-dev libjpeg-turbo8-dev libpng-dev zlib1g-dev libwebp-dev
+            sudo apt install -y fontconfig libfreetype-dev libjpeg-turbo8-dev libpng-dev zlib1g-dev libwebp-dev mesa-utils-extra libgles2-mesa-dev
       - name: "Clone skia"
         run: git clone --depth 1 https://github.com/mono/skia.git skia_repo
       - uses: mlugg/setup-zig@v1
