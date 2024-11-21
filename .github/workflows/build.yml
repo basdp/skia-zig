@@ -58,7 +58,7 @@ jobs:
           
           cd ..
           rm -rf skia_repo
-          rm -rf .*
+          rm -rf .* 2>/dev/null
           ls -lah
       - uses: mlugg/setup-zig@v1
         with:
