@@ -58,7 +58,7 @@ jobs:
           
           cd ..
           rm -rf skia_repo
-          find -maxdepth 1 -name ".*" -delete
+          find -maxdepth 1 -name ".*"  ! -name "." ! -name ".." -exec rm -rf {} + 
           ls -lah
       - uses: mlugg/setup-zig@v1
         with:
