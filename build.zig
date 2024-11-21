@@ -21,13 +21,9 @@ pub fn build(b: *std.Build) !void {
         .root_source_file = b.path("src/main.zig"),
     });
 
-    switch (target.result.os.tag) {
-        .windows => {
-            var path: [128:0]u8 = undefined;
-            module.addLibraryPath(b.path(try std.fmt.bufPrint(&path, "skia/lib/{s}", .{@tagName(target.result.cpu.arch)})));
-        },
-        else => return error.PlatformNotSupported,
-    }
+    var path: [128:0]u8 = undefined;
+    module.addLibraryPath(b.path(try std.fmt.bufPrint(&path, "skia/lib/", .{})));
+
     module.linkSystemLibrary("skia", .{ .preferred_link_mode = .static });
     module.link_libc = true;
 }
