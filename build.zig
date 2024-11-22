@@ -32,5 +32,7 @@ pub fn build(b: *std.Build) !void {
     module.linkSystemLibrary("libwebp", .{});
     module.linkSystemLibrary("libwebpdemux", .{});
     module.linkSystemLibrary("zlib", .{});
+    module.linkSystemLibrary("opengl", .{});
+    module.linkSystemLibrary("egl", .{});
     module.link_libc = true;
 }

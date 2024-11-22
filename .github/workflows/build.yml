@@ -49,8 +49,6 @@ jobs:
             cxx="zig c++"
             extra_cflags=[
                 "-mevex512",
-                "-DMESA_EGL_NO_X11_HEADERS",
-                "-DEGL_NO_IMAGE_EXTERNAL",
             ]
           '
           third_party/ninja/ninja -C out/lib skia
