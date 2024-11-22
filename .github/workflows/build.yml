@@ -36,11 +36,7 @@ jobs:
             is_component_build=false
             is_static_skiasharp=true
             is_official_build=true
-            skia_use_harfbuzz=false
-            skia_use_icu=false
-            skia_enable_tools=false
-            skia_use_expat=false
-            skia_enable_skottie=false
+            skia_use_system_harfbuzz=false
             skia_enable_gpu=true
             skia_enable_pdf=true
             skia_enable_discrete_gpu=true
@@ -49,6 +45,8 @@ jobs:
             cxx="zig c++"
             extra_cflags=[
                 "-mevex512",
+                "-mavx",
+                "-mavx512f",
             ]
           '
           third_party/ninja/ninja -C out/lib skia
