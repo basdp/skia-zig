@@ -18,7 +18,7 @@ jobs:
       - name: Install skia dependency
         run: |
             sudo apt update
-            sudo apt install -y fontconfig libfreetype-dev libjpeg-turbo8-dev libpng-dev zlib1g-dev libwebp-dev mesa-utils-extra libgles2-mesa-dev
+            sudo apt install -y fontconfig libfreetype-dev libjpeg-turbo8-dev libpng-dev zlib1g-dev libwebp-dev vulkan-tools libvulkan-dev vulkan-validationlayers-dev spirv-tools
       - name: "Clone skia"
         run: git clone --depth 1 https://github.com/mono/skia.git skia_repo
       - uses: mlugg/setup-zig@v1
@@ -37,10 +37,11 @@ jobs:
             is_static_skiasharp=true
             is_official_build=true
             skia_use_system_harfbuzz=false
+            skia_use_system_libpng=true
             skia_enable_gpu=true
             skia_enable_pdf=true
             skia_enable_discrete_gpu=true
-            skia_use_egl=true
+            skia_use_vulkan=true
             cc="zig cc"
             cxx="zig c++"
             extra_cflags=[
