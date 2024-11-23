@@ -1,11 +1,13 @@
 name: Build Zig package
-on: [push]
+on: 
+  push:
+  workflow_dispatch:
 
 jobs:
-  mingw64-x64:
-    name: Build Skia with MinGW Clang
+  clang-x64:
+    name: Build Skia
 
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
 
     defaults:
       run:
@@ -13,62 +15,51 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
-
-      - uses: msys2/setup-msys2@v2
-        id: msys2
-        with:
-          msystem: MINGW64
-          update: true
-          install: mingw-w64-x86_64-clang mingw-w64-x86_64-lld
-
+      - name: Install skia dependency
+        run: |
+            sudo apt update
+            sudo apt install -y fontconfig libfreetype-dev libjpeg-turbo8-dev libpng-dev zlib1g-dev libwebp-dev vulkan-tools libvulkan-dev vulkan-validationlayers-dev spirv-tools
       - name: "Clone skia"
         run: git clone --depth 1 https://github.com/mono/skia.git skia_repo
+      - uses: mlugg/setup-zig@v1
+        with:
+          version: 0.13.0
       - name: "Build skia"
         run: |
-          "${{ steps.msys2.outputs.msys2-location }}/mingw64/bin/clang" --version
-
           cd skia_repo
           python3 tools/git-sync-deps
           python3 bin/fetch-ninja
           bin/gn gen out/lib --args='
-            target_os="win"
+            target_os="linux"
             target_cpu="x64"
             is_debug=false
             is_component_build=false
             is_static_skiasharp=true
             is_official_build=true
-            skia_enable_fontmgr_win=true
+            skia_use_system_harfbuzz=false
+            skia_use_system_libpng=true
             skia_enable_gpu=true
             skia_enable_pdf=true
-            skia_use_system_libjpeg_turbo=false
-            skia_use_system_libpng=false
-            skia_use_system_libwebp=false
-            skia_use_system_zlib=false
             skia_enable_discrete_gpu=true
-            skia_use_harfbuzz=false
-            skia_use_icu=false
-            skia_enable_tools=false
-            skia_use_expat=false
-            skia_enable_skottie=false
-            skia_use_gl=true
-            clang_win="${{ steps.msys2.outputs.msys2-location }}/mingw64"
-            clang_win_version=18
-            cc="${{ steps.msys2.outputs.msys2-location }}/mingw64/bin/clang"
-            cxx="${{ steps.msys2.outputs.msys2-location }}/mingw64/bin/clang++"
+            skia_use_vulkan=true
+            cc="zig cc"
+            cxx="zig c++"
+            extra_cflags=[
+                "-mevex512",
+                "-mavx",
+                "-mavx512f",
+            ]
           '
           third_party/ninja/ninja -C out/lib skia
           
-          mkdir -p ../skia/lib/win-x86_64
+          mkdir -p ../skia/lib
           cp --recursive include ../skia/include
-          cp --recursive out/lib/*.lib ../skia/lib/win-x86_64/
+          cp --recursive out/lib/*.a ../skia/lib
           
           cd ..
           rm -rf skia_repo
-          rm -rf .*
+          find -maxdepth 1 -name ".*"  ! -name "." ! -name ".." -exec rm -rf {} + 
           ls -lah
-      - uses: mlugg/setup-zig@v1
-        with:
-          version: 0.13.0
       - name: "Generate zig source"
         run: sh generate.sh
       - name: Archive the build
